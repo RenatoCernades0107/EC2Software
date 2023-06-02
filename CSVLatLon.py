@@ -1,18 +1,16 @@
 from ILatLon import *
-import csv
-
 
 class CSVLatLon(ILatLon):
     def getLatLon(self, ciudad: str, pais: str) -> Tuple[float, float]:
-        with csv.reader("worldcities.csv") as reader:
+        file = open("worldcities.csv", encoding="utf8")
+        line = file.readline()
+        while True:
             line = file.readline()
-            while True:
-                line = file.readline()
-                if not line:
-                    break
-                values = line.split(",")
-                if values[1] == ciudad and values[4] == pais:
-                    return (float(values[2]), float(values[3]))
+            if not line:
+                raise Exception("No city and country found")
+            values = line.split(",")
+            if values[1][1:-1] == ciudad and values[4][1:-1] == pais:
+                return (float(values[2][1:-1]), float(values[3][1:-1]))
 
 
 if __name__ == "__main__":
