@@ -1,8 +1,5 @@
-
+from typing import Tuple
 
 class ILatLon:
-    def __init__(self) -> None:
-        pass
-
-    def getLatLon(self, ciudad, pais) -> object:
+    def getLatLon(self, ciudad: str, pais: str) -> Tuple[float, float]:
         pass
